@@ -52,6 +52,10 @@ require({
             var GLONASS = [28915, 29672, 29670, 29671, 32276, 32275, 32393, 32395, 36111, 36112, 36113, 36400, 36402, 36401, 37139, 37138, 37137, 37829, 37869, 37867, 37868, 39155, 39620, 40001];
             var INMARSAT = [20918, 21149, 21814, 21940, 23839, 24307, 24674, 24819, 25153, 28628, 28899, 33278, 40384, 39476];
             var LANDSAT = [25682, 39084];
+            var IRAN = [45529, 28893];
+            var NORTHKOREAN = [41332, 39026];
+            var RUSSIAN = [47546, 44797, 44552, 44424, 44423, 44422, 44421, 43752, 43751, 43687, 43657, 43243];
+            var CHINESE = [49029, 49028, 49026, 48863, 48861, 48860, 48424, 48423, 48340, 47857, 43275, 47854, 47695, 47693, 47691, 47536, 47533, 47302, 46809, 46808,46807, 45462, 45461, 45460, 44451, 44450, 44449];
             var DIGITALGLOBE = [25919, 32060, 33331, 35946, 40115];
             var SPACESTATIONS = [
                 25544, // International Space Station
@@ -223,6 +227,26 @@ require({
                     case 'space-stations':
                         $.each(renderer.satellites, function () {
                             this.selected = SPACESTATIONS.indexOf(this.id) !== -1;
+                        });
+                        break;
+                   case 'special-satellites: PRK':
+                        $.each(renderer.satellites, function () {
+                            this.selected = NORTHKOREAN.indexOf(this.id) !== -1;
+                        });
+                        break;
+                   case 'special-satellites: IRN':
+                        $.each(renderer.satellites, function () {
+                            this.selected = IRAN.indexOf(this.id) !== -1;
+                        });
+                        break;
+                   case 'special-satellites: RUS':
+                        $.each(renderer.satellites, function () {
+                            this.selected = RUSSIAN.indexOf(this.id) !== -1;
+                        });
+                        break;
+                   case 'special-satellites: CHN':
+                        $.each(renderer.satellites, function () {
+                            this.selected = CHINESE.indexOf(this.id) !== -1;
                         });
                         break;
                     case 'gps':
