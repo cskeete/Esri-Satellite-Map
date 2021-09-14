@@ -162,7 +162,7 @@
 
                 // Add to scene
                 this.scene.add(
-                    this.normal,
+                    //this.normal,
                     this.selected,
                     this.hover,
                     this.trajectory,
