@@ -80,7 +80,7 @@
                     new THREE.BufferGeometry(),
                     new THREE.PointsMaterial({
                         color: 0xffffff,
-                        size: 1,
+                        size: 0,
                         sizeAttenuation: false,
                         vertexColors: THREE.NoColors,
                         fog: false
