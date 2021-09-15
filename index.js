@@ -252,6 +252,7 @@ require({
             $('#dropdown-presets > li > a').click(function () {
                 resetUI();
                 switch ($(this).attr('data-value')) {
+                      /*
                     case 'american-satellites':
                         $('.rc-country > button').removeClass('active');
                         $('.rc-country > button[data-value="US"]').addClass('active');
@@ -272,6 +273,7 @@ require({
                             this.selected = SPACESTATIONS.indexOf(this.id) !== -1;
                         });
                         break;
+                        */
                    case 'special-satellites: PRK':
                         $.each(renderer.satellites, function () {
                             this.selected = NORTHKOREAN.indexOf(this.id) !== -1;
