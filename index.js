@@ -181,8 +181,8 @@ require({
                             this.metadata = metadata[this.id];
                         });
                     });
-                   console.log("Hello");
                 });
+               console.log("Now This");
             });
             view.on('click', function (e) {
                 // Highlighted satellite
