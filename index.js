@@ -181,6 +181,7 @@ require({
                             this.metadata = metadata[this.id];
                         });
                     });
+                   console.log("Hello");
                 });
             });
             view.on('click', function (e) {
