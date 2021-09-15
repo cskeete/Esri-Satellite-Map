@@ -38,7 +38,7 @@ require({
         SceneView,
         ExternalRenderers,
         FeatureLayer, 
-        LabelClass, 
+        //LabelClass, 
         Renderer,
         number,
         string
