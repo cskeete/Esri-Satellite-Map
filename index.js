@@ -80,6 +80,14 @@ require({
             id: "usmclocations"
          });
            
+         const currentElevationInfo = {
+            mode: "relative-to-ground",
+            offset: 0,
+            unit: "meters"
+          };
+
+         usmcLayer.elevationInfo = currentElevationInfo;
+           
             // Create map and view
             var view = new SceneView({
                 map: new Map({
