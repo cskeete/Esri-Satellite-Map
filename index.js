@@ -113,6 +113,8 @@ require({
 
          usmclayer.labelingInfo = [ usmcLabelClass ];
            
+         usmclayer.labelsVisible = true;
+           
             // Create map and view
             var view = new SceneView({
                 map: new Map({
