@@ -81,7 +81,8 @@ require({
            const usmclayer = new FeatureLayer({
                // URL to the service
                url: "https://services5.arcgis.com/30usvfexPlGhD61v/arcgis/rest/services/USMC_Locations/FeatureServer/0",
-            id: "usmclocations"
+               id: "usmclocations",
+               outFields:["Name"]
          });
            
          const currentElevationInfo = {
