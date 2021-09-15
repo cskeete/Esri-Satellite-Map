@@ -94,7 +94,9 @@ require({
          usmclayer.elevationInfo = currentElevationInfo;
            
           const usmcLabelClass = new LabelClass({
-          labelExpressionInfo: { expression: "$feature.Name" },
+           labelExpressionInfo: {
+            expression: 'DefaultValue($feature.Name, "no data")'
+          },
           symbol: {
             type: "label-3d", // autocasts as new LabelSymbol3D()
             symbolLayers: [
