@@ -88,7 +88,7 @@ require({
             unit: "meters"
           };
 
-         usmcLayer.elevationInfo = currentElevationInfo;
+         usmclayer.elevationInfo = currentElevationInfo;
            
             // Create map and view
             var view = new SceneView({
