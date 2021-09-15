@@ -25,6 +25,7 @@ require({
         'esri/Camera',
         'esri/views/SceneView',
         'esri/views/3d/externalRenderers',
+        'esri/layers/FeatureLayer',
         'root/renderer',
         'dojo/number',
         'dojo/string',
@@ -35,6 +36,7 @@ require({
         Camera,
         SceneView,
         ExternalRenderers,
+        FeatureLayer, 
         Renderer,
         number,
         string
