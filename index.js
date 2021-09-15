@@ -73,10 +73,18 @@ require({
             // Rendering variables.
             var renderer = null;
 
+           //usmc locations layer 
+           const usmclayer = new FeatureLayer({
+               // URL to the service
+               url: "https://services5.arcgis.com/30usvfexPlGhD61v/arcgis/rest/services/USMC_Locations/FeatureServer/0",
+            id: "usmclocations"
+         });
+           
             // Create map and view
             var view = new SceneView({
                 map: new Map({
-                    basemap: 'satellite'
+                    basemap: 'satellite',
+                   layers:[usmclayer]
                 }),
                 container: 'map',
                 ui: {
