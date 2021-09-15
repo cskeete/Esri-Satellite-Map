@@ -26,6 +26,7 @@ require({
         'esri/views/SceneView',
         'esri/views/3d/externalRenderers',
         'esri/layers/FeatureLayer',
+        'esri/layers/support/LabelClass',
         'root/renderer',
         'dojo/number',
         'dojo/string',
@@ -37,6 +38,7 @@ require({
         SceneView,
         ExternalRenderers,
         FeatureLayer, 
+        LabelClass, 
         Renderer,
         number,
         string
@@ -89,6 +91,16 @@ require({
           };
 
          usmclayer.elevationInfo = currentElevationInfo;
+           
+          const usmcLabelClass = new LabelClass({
+          labelExpressionInfo: { expression: "$feature.Name" },
+         symbol: {
+         type: "text",  // autocasts as new TextSymbol()
+         color: "white"
+         }
+      });
+
+         usmclayer.labelingInfo = [ usmcLabelClass ];
            
             // Create map and view
             var view = new SceneView({
