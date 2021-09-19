@@ -83,28 +83,7 @@ require({
            
         
           
-          const usmcLabelClass = new LabelClass({
-           labelExpressionInfo: {
-            expression: 'DefaultValue($feature.Name, "no data")'
-          },
-          symbol: {
-            type: "label", // autocasts as new LabelSymbol3D()
-            symbolLayers: [
-              {
-                type: "text", // autocasts as new TextSymbol3DLayer()
-                material: {
-                  color: "white"
-                },
-                size: 10
-              }
-            ]
-          },
-      });
-
-         usmclayer.labelingInfo = [ usmcLabelClass ];
-           
-         usmclayer.labelsVisible = true;
-           
+         
             // Create map and view
             var view = new MapView({
                 map: new Map({
