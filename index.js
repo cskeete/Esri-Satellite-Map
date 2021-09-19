@@ -85,34 +85,8 @@ require({
                outFields:["Name"]
          });
            
-         const currentElevationInfo = {
-            mode: "relative-to-ground",
-            offset: 0,
-            unit: "meters"
-          };
-
-         usmclayer.elevationInfo = currentElevationInfo;
-           
-          const usmcLabelClass = new LabelClass({
-           labelExpressionInfo: {
-            expression: 'DefaultValue($feature.Name, "no data")'
-          },
-          symbol: {
-            type: "label-3d", // autocasts as new LabelSymbol3D()
-            symbolLayers: [
-              {
-                type: "text", // autocasts as new TextSymbol3DLayer()
-                material: {
-                  color: "white"
-                },
-                size: 10
-              }
-            ]
-          },
-      });
-
-         usmclayer.labelingInfo = [ usmcLabelClass ];
-           
+        
+         
          usmclayer.labelsVisible = true;
            
             // Create map and view
@@ -127,43 +101,9 @@ require({
                         'zoom',
                         'compass'
                     ]
-                },
-                environment: {
-                    lighting: {
-                        directShadowsEnabled: false,
-                        ambientOcclusionEnabled: false,
-                        cameraTrackingEnabled: false
-                    },
-                    atmosphereEnabled: true,
-                    atmosphere: {
-                        quality: 'high'
-                    },
-                    starsEnabled: false
-                },
-                constraints: {
-                    altitude: {
-                        max: 12000000000
-                    }
                 }
-            }); /*
-            view.when(function () {
-                // Set initial camera position
-                view.set('camera', Camera.fromJSON({
-                    'position': {
-                        'x': -1308000,
-                        'y': 2670000,
-                        'spatialReference': {
-                            'wkid': 102100,
-                            'latestWkid': 3857
-                        },
-                        'z': 110000000
-                    }
-                }));
-
-                // Increase far clipping plane
-                view.constraints.clipDistance.far *= 4;
-
-                // Load satellites
+         }); 
+               // Load satellites
                 loadSatellites().done(function (satellites) {
                     // Load satellite layer
                     renderer = new Renderer(satellites);
@@ -182,7 +122,7 @@ require({
                         });
                     });
                    console.log("Hello");
-                }); /*
+                }); 
             }); 
             view.on('click', function (e) {
                 // Highlighted satellite
