@@ -1,18 +1,14 @@
 ﻿/* ------------------------------------------------------------
-
    Copyright 2015 Esri
-
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at:
    https://www.apache.org/licenses/LICENSE-2.0
-
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
 --------------------------------------------------------------- */
 
 require({
@@ -86,7 +82,28 @@ require({
          });
            
         
-         
+         usmclayer.elevationInfo = currentElevationInfo;
+           
+          const usmcLabelClass = new LabelClass({
+           labelExpressionInfo: {
+            expression: 'DefaultValue($feature.Name, "no data")'
+          },
+          symbol: {
+            type: "label", // autocasts as new LabelSymbol3D()
+            symbolLayers: [
+              {
+                type: "text", // autocasts as new TextSymbol3DLayer()
+                material: {
+                  color: "white"
+                },
+                size: 10
+              }
+            ]
+          },
+      });
+
+         usmclayer.labelingInfo = [ usmcLabelClass ];
+           
          usmclayer.labelsVisible = true;
            
             // Create map and view
@@ -102,8 +119,24 @@ require({
                         'compass'
                     ]
                 }
-         }); 
-               // Load satellites
+
+            }); /*
+            view.when(function () {
+                // Set initial camera position
+                view.set('camera', Camera.fromJSON({
+                    'position': {
+                        'x': -1308000,
+                        'y': 2670000,
+                        'spatialReference': {
+                            'wkid': 102100,
+                            'latestWkid': 3857
+                        },
+                        'z': 110000000
+                    }
+                }));
+                // Increase far clipping plane
+                view.constraints.clipDistance.far *= 4;
+                // Load satellites
                 loadSatellites().done(function (satellites) {
                     // Load satellite layer
                     renderer = new Renderer(satellites);
@@ -111,10 +144,8 @@ require({
                         view,
                         renderer
                     );
-
                     // Show satellite count
                     updateCounter();
-
                     // Load metadata
                     loadMetadata().done(function (metadata) {
                         $.each(renderer.satellites, function () {
@@ -127,14 +158,12 @@ require({
             view.on('click', function (e) {
                 // Highlighted satellite
                 var sat = renderer.satelliteHover;
-
                 // Nothing selected. Hide orbit and close information window.
                 if (sat === null) {
                     renderer.hideOrbit();
                     showDialog('main');
                     return;
                 }
-
                 // Display information panel
                 $('#infoWindow-title').html(sat.metadata.name);
                 $('#infoWindow-norad').html(sat.id);
@@ -156,20 +185,16 @@ require({
                 $('#link-nasa').attr('href', string.substitute(NASA_SATELLITE_DATABASE + '${id}', { id: sat.metadata.int }));
                 $('#link-n2yo').attr('href', string.substitute(N2YO_SATELLITE_DATABASE + '${id}', { id: sat.id }));
                 showDialog('info');
-
                 // Display the orbit for the click satellite
                 renderer.showOrbit();
-            });
-
+            }); */
             $('#map').mousemove(function (e) {
                 if (!renderer) { return; }
                 renderer.mousemove(e.offsetX, e.offsetY);
             });
-
             $('#bottom-left-help a').attr('target', '_blank');
             $('#bottom-left-about a').attr('target', '_blank');
             $('#link-nasa, #link-n2yo').attr('target', '_blank');
-
             $('.rc-close').click(function () {
                 $.each(renderer.satellites, function () {
                     this.highlighted = false;
@@ -177,18 +202,14 @@ require({
                 renderer.hideOrbit();
                 showDialog('main');
             });
-
             $('#button-help').click(function () {
                 showDialog('help');
             });
-
             $('#button-about').click(function () {
                 showDialog('about');
             });
-
             // Enable bootstrap tooltips
             $('[data-toggle="tooltip"]').tooltip();
-
             // Handle quick link presets
             $('#dropdown-presets > li > a').click(function () {
                 resetUI();
