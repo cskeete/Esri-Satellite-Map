@@ -23,7 +23,7 @@ require({
 }, [
         'esri/Map',
         'esri/Camera',
-        'esri/views/SceneView',
+        'esri/views/MapView',
         'esri/views/3d/externalRenderers',
         'esri/layers/FeatureLayer',
         'esri/layers/support/LabelClass',
@@ -35,7 +35,7 @@ require({
     function (
         Map,
         Camera,
-        SceneView,
+        MapView,
         ExternalRenderers,
         FeatureLayer, 
         LabelClass, 
@@ -116,9 +116,9 @@ require({
          usmclayer.labelsVisible = true;
            
             // Create map and view
-            var view = new SceneView({
+            var view = new MapView({
                 map: new Map({
-                    basemap: 'satellite',
+                    basemap: 'gray-vector',
                    layers:[usmclayer]
                 }),
                 container: 'map',
@@ -145,7 +145,7 @@ require({
                         max: 12000000000
                     }
                 }
-            });
+            }); /*
             view.when(function () {
                 // Set initial camera position
                 view.set('camera', Camera.fromJSON({
@@ -182,8 +182,8 @@ require({
                         });
                     });
                    console.log("Hello");
-                });
-            });
+                }); /*
+            }); 
             view.on('click', function (e) {
                 // Highlighted satellite
                 var sat = renderer.satelliteHover;
