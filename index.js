@@ -82,8 +82,7 @@ require({
          });
            
         
-         usmclayer.elevationInfo = currentElevationInfo;
-           
+          
           const usmcLabelClass = new LabelClass({
            labelExpressionInfo: {
             expression: 'DefaultValue($feature.Name, "no data")'
