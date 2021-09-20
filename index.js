@@ -100,7 +100,7 @@ require({
 
             }); 
             view.when()
-		.then()
+		.then(loadSatellitesfromText)
 		.then()
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
@@ -502,7 +502,46 @@ require({
                 }
             }
 
-            function loadSatellites() {
+	   function loadSatellitesfromText(){
+		   return promiseUtils.create(function(resolve, reject){
+			   $.get(TLE, function(data){
+				   var lines = data.split('\n');
+				   var count = lines.length / 2).toFixed(0);
+				   var satellites = [];
+					for (var i = 0; i < count; i++) {
+						var line1 = lines[i * 2 + 0];
+						var line2 = lines[i * 2 + 1];
+						var satrec = null;
+						try {
+							satrec = satellite.twoline2satrec(line1, line2);
+						}
+						catch (err) {
+							continue;
+						}
+						if (satrec === null || satrec === undefined) { continue; }
+						satellites.push({
+							id: Number(line1.substring(2, 7)),
+							satrec: satrec,
+							selected: false,
+							highlighted: false,
+							metadata: null
+						});
+					} 
+
+			   });
+
+			   resolve(
+				console.log("Stop the script here")
+			   );
+
+		   });
+
+
+	   }
+
+		
+		
+	function loadSatellites() {
                 var defer = new $.Deferred();
                 $.get(TLE, function (data) {
                     var lines = data.split('\n');
