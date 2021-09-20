@@ -566,9 +566,10 @@ require({
 								launch: launch
 							};
 						});
-					console.log("First check point: After Each ");
+					renderder.metadata = metadata;
+					resolve(metadata);
+						
 					});				
-					console.log("second check point: After get");
 				});				
 			}
 
