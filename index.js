@@ -103,10 +103,8 @@ require({
 		.then(loadSatellites)
 		.then(loadMetadata)
 		.then(generateGraphics)
-		.then(function(){
-			
-			console.log("After the return of the generateGraphics");
-		})
+		.then(createSatLayer)
+		.then(addToView)
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
           });
@@ -707,6 +705,11 @@ require({
 			);
 			return position_and_velocity.position;			
 	};            
+	
+	// Adds a given layer to the map in the view
+        function addToView(layer) {
+          view.map.add(layer);
+        }
 	
 	function resetUI() {
                 $('.rc-country > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
