@@ -20,10 +20,11 @@ require({
         'esri/Map',
         'esri/Camera',
         'esri/views/MapView',
-        'esri/views/3d/externalRenderers',
         'esri/layers/FeatureLayer',
-        'esri/layers/support/LabelClass',
-        'root/renderer',
+		'esri/core/promiseUtils',
+        'esri/Graphic',
+        'esri/geometry/Point',
+        'esri/rest/locator',
         'dojo/number',
         'dojo/string',
         'dojo/domReady!'
@@ -32,10 +33,10 @@ require({
         Map,
         Camera,
         MapView,
-        ExternalRenderers,
-        FeatureLayer, 
-        LabelClass, 
-        Renderer,
+        FeatureLayer,
+		Graphic,
+        Point,
+        locator,		
         number,
         string
     ) {
@@ -82,8 +83,8 @@ require({
          });
            
         
+
           
-         
             // Create map and view
             var view = new MapView({
                 map: new Map({
@@ -98,41 +99,13 @@ require({
                     ]
                 }
 
-            }); /*
-            view.when(function () {
-                // Set initial camera position
-                view.set('camera', Camera.fromJSON({
-                    'position': {
-                        'x': -1308000,
-                        'y': 2670000,
-                        'spatialReference': {
-                            'wkid': 102100,
-                            'latestWkid': 3857
-                        },
-                        'z': 110000000
-                    }
-                }));
-                // Increase far clipping plane
-                view.constraints.clipDistance.far *= 4;
-                // Load satellites
-                loadSatellites().done(function (satellites) {
-                    // Load satellite layer
-                    renderer = new Renderer(satellites);
-                    ExternalRenderers.add(
-                        view,
-                        renderer
-                    );
-                    // Show satellite count
-                    updateCounter();
-                    // Load metadata
-                    loadMetadata().done(function (metadata) {
-                        $.each(renderer.satellites, function () {
-                            this.metadata = metadata[this.id];
-                        });
-                    });
-                   console.log("Hello");
-                }); 
             }); 
+            view.when()
+			     .then()
+				 .then()
+				 .catch((e) => {
+            console.error("Creating satellite layer failed", e);
+          });
             view.on('click', function (e) {
                 // Highlighted satellite
                 var sat = renderer.satelliteHover;
