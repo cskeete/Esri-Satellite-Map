@@ -620,7 +620,7 @@ require({
 				const satgraphic = new Graphic({
 					geometry: point,
 					symbol: markerSymbol,
-					attributes: satAtt	
+					//attributes: satAtt	
 				});
 				graphicsdata.push(satgraphic)			   
 				}
