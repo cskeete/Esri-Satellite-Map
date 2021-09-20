@@ -612,7 +612,7 @@ require({
 					apogee: Number(satellite.metadata.apogee),
 					perigee: Number(satellite.metadata.perigee),
 					size: satellite.metadata.size,
-					launch: satellite.metadata.launch
+					launch: satellite.metadata.launch.getTime()
 
 				};
 
@@ -652,7 +652,7 @@ require({
               },
 			  {
                 name: "launch",
-                type: "string"
+                type: "date"
 	      },
 			  {
                 name: "name",
