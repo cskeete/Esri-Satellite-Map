@@ -506,7 +506,7 @@ require({
 		   return promiseUtils.create(function(resolve, reject){
 			   $.get(TLE, function(data){
 				   var lines = data.split('\n');
-				   var count = lines.length / 2).toFixed(0);
+				   var count = (lines.length / 2).toFixed(0);
 				   var satellites = [];
 					for (var i = 0; i < count; i++) {
 						var line1 = lines[i * 2 + 0];
