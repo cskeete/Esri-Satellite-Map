@@ -104,7 +104,7 @@ require({
 		.then(fuction(satellites){
 		    console.log("Stop script here");
 			    
-	    });)
+	    })
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
           });
