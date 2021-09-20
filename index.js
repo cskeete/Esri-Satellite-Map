@@ -24,7 +24,6 @@ require({
         'esri/Graphic',
         'esri/geometry/Point',
         'esri/rest/locator',
-	'root/renderer',
         'dojo/number',
         'dojo/string',
         'dojo/domReady!'
@@ -37,7 +36,6 @@ require({
 	Graphic,
         Point,
         locator,
-	Renderer,
         number,
         string
     ) {
@@ -103,7 +101,7 @@ require({
             }); 
             view.when()
 		.then(loadSatellites)
-		.then(loadMetadata(satellites))
+		.then(loadMetadata)
 		.then(function(satellites, metadata){
 			console.log("Next Stop Here");
 			
@@ -533,6 +531,7 @@ require({
 								metadata: null
 							});
 						} 
+					renderer.satellites = satellites;   
 					resolve(satellites);
 				   });
 			   });
