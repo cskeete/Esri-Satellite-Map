@@ -581,7 +581,7 @@ require({
 				var graphicsdata = [];
 				for (var i = 0; i < renderer.satellites.length; i++) {
                     var satellite = renderer.satellites[i];
-                    var eci = this.getSatelliteLocation(satellite.satrec, curdate);
+                    var eci = getSatelliteLocation(satellite.satrec, curdate);
                     if (eci === null || eci === undefined || isNaN(eci.x) || isNaN(eci.y) || isNaN(eci.z)) {
                         continue;
                     }
@@ -626,9 +626,22 @@ require({
 				}
 				return graphicsdata
 			
-			}
+			};
             
-			function resetUI() {
+	function getSatelliteLocation(satrec, curdate){
+			var position_and_velocity = satellite.propagate(
+				satrec,
+				curdate.getUTCFullYear(),
+				curdate.getUTCMonth() + 1,
+				curdate.getUTCDate(),
+				curdate.getUTCHours(),
+				curdate.getUTCMinutes(),
+				curdate.getUTCSeconds()
+			);
+			return position_and_velocity.position;			
+	};            
+	
+	function resetUI() {
                 $('.rc-country > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
                 $('.rc-type > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
                 $('.rc-size > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
