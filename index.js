@@ -654,7 +654,7 @@ require({
 			  {
                 name: "launch",
                 type: "date"
-              ,
+	      },
 			  {
                 name: "name",
                 type: "string"
