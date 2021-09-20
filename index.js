@@ -101,7 +101,7 @@ require({
             }); 
             view.when()
 		.then(loadSatellitesfromText)
-		.then(fuction(satellites){
+		.then(function(satellites){
 		    console.log("Stop script here");
 			    
 	    })
