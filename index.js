@@ -71,7 +71,7 @@ require({
             var N2YO_SATELLITE_DATABASE = 'https://www.n2yo.com/satellite/?s=';                            // use NORAD id
 
             // Rendering variables.
-            var renderer = null;
+            var renderer = {};
 
            //usmc locations layer 
            const usmclayer = new FeatureLayer({
