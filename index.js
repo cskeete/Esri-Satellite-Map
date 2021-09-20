@@ -632,6 +632,7 @@ require({
 			};
     
 	function createSatLayer(graphicsdata){
+		var satLayer
 		return satLayer = new FeatureLayer({
 			source: graphicsdata,
             objectIdField: "OBJECTID",
