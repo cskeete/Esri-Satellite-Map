@@ -603,7 +603,7 @@ require({
 				if (satellite.metadata.name.indexOf(' DEB')  || satellite.metadata.name.indexOf(' R/B')){continue;} //Remove junk satellites
 				const satAtt = {
 
-					OBJECTID: satellite.id/*,
+					OBJECTID: satellite.id,
 					satrec: satellite.satrec,
 					name: satellite.metadata.name,
 					country: satellite.metadata.country,
@@ -612,7 +612,7 @@ require({
 					apogee: satellite.metadata.apogee,
 					perigee: satellite.metadata.perigee,
 					size: satellite.metadata.size,
-					launch: satellite.metadata.launch*/
+					launch: satellite.metadata.launch
 
 				};
 
@@ -631,7 +631,7 @@ require({
 	function createSatLayer(graphicsdata){
 		return new FeatureLayer({
 			source: graphicsdata,
-            /*objectIdField: "OBJECTID",
+            objectIdField: "OBJECTID",
             fields: [
               {
                 name: "OBJECTID",
@@ -674,7 +674,7 @@ require({
                 type: "string"
               }
 			  
-            ],*/
+            ],
 			renderer: {
 				type: "simple",
 				symbol:{
