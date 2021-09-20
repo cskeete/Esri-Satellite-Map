@@ -540,7 +540,7 @@ require({
 			   });
 		   }
 
-			function loadMetadata(){
+			function loadMetadata(renderer){
 				return promiseUtils.create(function(resolve, reject){
 					$.get(OIO, function (data) {
 						var metadata = {};
