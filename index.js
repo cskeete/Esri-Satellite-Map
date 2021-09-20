@@ -631,8 +631,8 @@ require({
 	function createSatLayer(graphicsdata){
 		return new FeatureLayer({
 			source: graphicsdata,
-            objectIdField: "OBJECTID",
-           /* fields: [
+            /*objectIdField: "OBJECTID",
+            fields: [
               {
                 name: "OBJECTID",
                 type: "oid"
