@@ -100,11 +100,12 @@ require({
 
             }); 
             view.when()
-		.then(loadSatellitesfromText)
-		.then(function(satellites){
-		    console.log("Stop script here");
-			    
-	    })
+		.then(loadSatellites)
+		.then(loadMetadata)
+		.then(function(satellites, metadata){
+			console.log("Next Stop Here");
+			
+		});
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
           });
@@ -505,103 +506,69 @@ require({
                 }
             }
 
-	   function loadSatellitesfromText(){
-		   return promiseUtils.create(function(resolve, reject){
-			   $.get(TLE, function(data){
-				   var lines = data.split('\n');
-				   var count = (lines.length / 2).toFixed(0);
-				   var satellites = [];
-					for (var i = 0; i < count; i++) {
-						var line1 = lines[i * 2 + 0];
-						var line2 = lines[i * 2 + 1];
-						var satrec = null;
-						try {
-							satrec = satellite.twoline2satrec(line1, line2);
-						}
-						catch (err) {
-							continue;
-						}
-						if (satrec === null || satrec === undefined) { continue; }
-						satellites.push({
-							id: Number(line1.substring(2, 7)),
-							satrec: satrec,
-							selected: false,
-							highlighted: false,
-							metadata: null
-						});
-					} 
-				resolve(satellites);
+		   function loadSatellites(){
+			   return promiseUtils.create(function(resolve, reject){
+				   $.get(TLE, function(data){
+					   var lines = data.split('\n');
+					   var count = (lines.length / 2).toFixed(0);
+					   var satellites = [];
+						for (var i = 0; i < count; i++) {
+							var line1 = lines[i * 2 + 0];
+							var line2 = lines[i * 2 + 1];
+							var satrec = null;
+							try {
+								satrec = satellite.twoline2satrec(line1, line2);
+							}
+							catch (err) {
+								continue;
+							}
+							if (satrec === null || satrec === undefined) { continue; }
+							satellites.push({
+								id: Number(line1.substring(2, 7)),
+								satrec: satrec,
+								selected: false,
+								highlighted: false,
+								metadata: null
+							});
+						} 
+					resolve(satellites);
+				   });
 			   });
-		   });
+		   }
 
-
-	   }
-
-		
-		
-	function loadSatellites() {
-                var defer = new $.Deferred();
-                $.get(TLE, function (data) {
-                    var lines = data.split('\n');
-                    var count = (lines.length / 2).toFixed(0);
-                    var satellites = [];
-                    for (var i = 0; i < count; i++) {
-                        var line1 = lines[i * 2 + 0];
-                        var line2 = lines[i * 2 + 1];
-                        var satrec = null;
-                        try {
-                            satrec = satellite.twoline2satrec(line1, line2);
-                        }
-                        catch (err) {
-                            continue;
-                        }
-                        if (satrec === null || satrec === undefined) { continue; }
-                        satellites.push({
-                            id: Number(line1.substring(2, 7)),
-                            satrec: satrec,
-                            selected: false,
-                            highlighted: false,
-                            metadata: null
-                        });
-                    }
-                    defer.resolve(satellites);
-                });
-                return defer.promise();
-            }
-
-            function loadMetadata() {
-                var defer = new $.Deferred();
-                $.get(OIO, function (data) {
-                    var metadata = {};
-                    var lines = data.split('\n');
-                    $.each(lines, function () {
-                        var items = this.split(',');
-                        var int = items[0];
-                        var name = items[1];
-                        var norad = Number(items[2]);
-                        var country = items[3];
-                        var period = items[4];
-                        var inclination = items[5];
-                        var apogee = items[6];
-                        var perigee = items[7];
-                        var size = items[8];
-                        var launch = new Date(items[10]);
-                        metadata[norad] = {
-                            int: int,
-                            name: name,
-                            country: country,
-                            period: period,
-                            inclination: inclination,
-                            apogee: apogee,
-                            perigee: perigee,
-                            size: size,
-                            launch: launch
-                        };
-                    });
-                    defer.resolve(metadata);
-                });
-                return defer.promise();
-            }
+			function loadMetadata(){
+				return promiseUtils.create(function(resolve, reject){
+					$.get(OIO, function (data) {
+						var metadata = {};
+						var lines = data.split('\n');
+						$.each(lines, function () {
+							var items = this.split(',');
+							var int = items[0];
+							var name = items[1];
+							var norad = Number(items[2]);
+							var country = items[3];
+							var period = items[4];
+							var inclination = items[5];
+							var apogee = items[6];
+							var perigee = items[7];
+							var size = items[8];
+							var launch = new Date(items[10]);
+							metadata[norad] = {
+								int: int,
+								name: name,
+								country: country,
+								period: period,
+								inclination: inclination,
+								apogee: apogee,
+								perigee: perigee,
+								size: size,
+								launch: launch
+							});
+						});
+					resolve(metadata);
+					});				
+				});				
+			}
 
             function resetUI() {
                 $('.rc-country > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
