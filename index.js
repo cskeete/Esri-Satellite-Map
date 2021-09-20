@@ -587,9 +587,7 @@ require({
 				    }
 							satellite.postition_X = eci.x * 1000
 							satellite.postition_Y = eci.y * 1000
-							var satID = Number(satellite.id);
-							var satMetadata = renderer.metatdata[satID]
-
+							satellite.metadata = renderer.metadata[satellite.id]
 							const point = {
 								type: "point", // autocasts as new Point()
 								x: satellite.postition_X,
