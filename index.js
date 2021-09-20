@@ -580,52 +580,53 @@ require({
 				var curdate = new Date();
 				var graphicsdata = [];
 				for (var i = 0; i < renderer.satellites.length; i++) {
-                    var satellite = renderer.satellites[i];
-                    var eci = getSatelliteLocation(satellite.satrec, curdate);
-                    if (eci === null || eci === undefined || isNaN(eci.x) || isNaN(eci.y) || isNaN(eci.z)) {
-                        continue;
-                    }
-					satellite.postition_X = eci.x * 1000
-					satellite.postition_Y = eci.y * 1000
-					satellite.metatdata = renderer.metatdata[Number(satellite.id)]
-					
-					const point = {
-						type: "point", // autocasts as new Point()
-						x: satellite.postition_X,
-						y: satellite.postition_Y,
-						spatialReference: SpatialReference.WebMercator
-					};
-					
-					   // Create a symbol for drawing the point
-					const markerSymbol = {
-						type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-						color: [226, 119, 40]  
-					};
+				    var satellite = renderer.satellites[i];
+				    var eci = getSatelliteLocation(satellite.satrec, curdate);
+				    if (eci === null || eci === undefined || isNaN(eci.x) || isNaN(eci.y) || isNaN(eci.z)) {
+					continue;
+				    }
+							satellite.postition_X = eci.x * 1000
+							satellite.postition_Y = eci.y * 1000
+							var satID = Number(satellite.id);
+							satellite.metatdata = renderer.metatdata[satID]
 
-					const satAtt = {
-						
-						OBJECTID: satellite.id,
-						satrec: satellite.satrec,
-						name: satellite.metadata.name,
-						country: satellite.metadata.country,
-						period: satellite.metadata.period,
-						inclination: satellite.metadata.inclination,
-						apogee: satellite.metadata.apogee,
-						perigee: satellite.metadata.perigee,
-						size: satellite.metadata.size,
-						launch: satellite.metadata.launch
-					
-					};
-					
-					const satgraphic = new Graphic({
-						geometry: point,
-						symbol: markerSymbol,
-						attributes: satAtt	
-					});
-					graphicsdata.push(satgraphic)			   
+							const point = {
+								type: "point", // autocasts as new Point()
+								x: satellite.postition_X,
+								y: satellite.postition_Y,
+								spatialReference: SpatialReference.WebMercator
+							};
+
+							   // Create a symbol for drawing the point
+							const markerSymbol = {
+								type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+								color: [226, 119, 40]  
+							};
+
+							const satAtt = {
+
+								OBJECTID: satellite.id,
+								satrec: satellite.satrec,
+								name: satellite.metadata.name,
+								country: satellite.metadata.country,
+								period: satellite.metadata.period,
+								inclination: satellite.metadata.inclination,
+								apogee: satellite.metadata.apogee,
+								perigee: satellite.metadata.perigee,
+								size: satellite.metadata.size,
+								launch: satellite.metadata.launch
+
+							};
+
+							const satgraphic = new Graphic({
+								geometry: point,
+								symbol: markerSymbol,
+								attributes: satAtt	
+							});
+							graphicsdata.push(satgraphic)			   
 				}
 				return graphicsdata
-			
+
 			};
             
 	function getSatelliteLocation(satrec, curdate){
