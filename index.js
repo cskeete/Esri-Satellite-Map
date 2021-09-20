@@ -103,7 +103,7 @@ require({
 		.then(loadSatellites)
 		.then(loadMetadata)
 		.then(generateGraphics)
-		.then(function(){
+		.then(function(graphicsdata){
 			
 			console.log("After the return of the generateGraphics");
 		})
