@@ -605,7 +605,7 @@ require({
 
 								OBJECTID: satellite.id,
 								satrec: satellite.satrec,
-								name: satellite.metadata.name,
+								name: satellite.metadata.name || null,
 								country: satellite.metadata.country,
 								period: satellite.metadata.period,
 								inclination: satellite.metadata.inclination,
@@ -615,6 +615,10 @@ require({
 								launch: satellite.metadata.launch
 
 							};
+
+							if satAtt.name == null {
+								continue;
+							}
 
 							const satgraphic = new Graphic({
 								geometry: point,
