@@ -640,7 +640,7 @@ require({
               },
               {
                 name: "apogee",
-                type: "string"
+                type: "integer"
               },
 			  {
                 name: "country",
