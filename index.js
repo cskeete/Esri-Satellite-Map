@@ -535,7 +535,7 @@ require({
 							});
 						} 
 					renderer.satellites = satellites;   
-					resolve(satellites);
+					resolve(renderer);
 				   });
 			   });
 		   }
@@ -570,7 +570,7 @@ require({
 							};
 						});
 					renderer.metadata = metadata;
-					resolve(metadata);
+					resolve(renderer);
 						
 					});				
 				});				
