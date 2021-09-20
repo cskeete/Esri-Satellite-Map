@@ -603,7 +603,7 @@ require({
 				};
 				if (satellite.metadata === null || satellite.metadata === undefined){continue;} // Remove satellites without metadata
 				if (satellite.metadata.name === null || satellite.metadata.name === undefined){continue;}  //Remove satellites without names
-				if (satellite.metadata.name.indexOf(' DEB')  || satellite.metadata.name.indexOf(' R/B')){continue;} //Remove junk satellites
+				if (satellite.metadata.name.indexOf(' DEB') !== -1 || satellite.metadata.name.indexOf(' R/B') !== -1){continue;} //Remove junk satellites
 				const satAtt = {
 
 					OBJECTID: satellite.id,
@@ -623,7 +623,7 @@ require({
 				const satgraphic = new Graphic({
 					geometry: point,
 					symbol: markerSymbol,
-					//attributes: satAtt	
+					attributes: satAtt	
 				});
 				graphicsdata.push(satgraphic)			   
 				}
