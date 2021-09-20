@@ -563,7 +563,7 @@ require({
 								perigee: perigee,
 								size: size,
 								launch: launch
-							});
+							};
 						});
 					resolve(metadata);
 					});				
