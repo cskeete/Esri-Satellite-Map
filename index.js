@@ -712,7 +712,7 @@ require({
 	
 	// Adds a given layer to the map in the view
         function addToView(satLayer) {
-          view.map.add(satLayer);
+          map.layers.add(satLayer);
         }
 	
 	function resetUI() {
