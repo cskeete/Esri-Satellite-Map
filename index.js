@@ -566,7 +566,7 @@ require({
 								launch: launch
 							};
 						});
-					renderder.metadata = metadata;
+					renderer.metadata = metadata;
 					resolve(metadata);
 						
 					});				
