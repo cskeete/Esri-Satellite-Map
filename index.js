@@ -536,7 +536,7 @@ require({
 			   });
 		   }
 
-			function loadMetadata(){
+			function loadMetadata(satellites){
 				return promiseUtils.create(function(resolve, reject){
 					$.get(OIO, function (data) {
 						var metadata = {};
@@ -565,8 +565,9 @@ require({
 								launch: launch
 							};
 						});
-					resolve(metadata);
+					console.log("First check point: After Each ");
 					});				
+					console.log("second check point: After get");
 				});				
 			}
 
