@@ -632,11 +632,11 @@ require({
 		return new FeatureLayer({
 			source: graphicsdata,
             objectIdField: "OBJECTID",
-            fields: [
+           /* fields: [
               {
                 name: "OBJECTID",
                 type: "oid"
-              }/*,
+              },
               {
                 name: "apogee",
                 type: "string"
@@ -672,9 +672,9 @@ require({
 			  {
                 name: "size",
                 type: "string"
-              }*/
+              }
 			  
-            ],
+            ],*/
 			renderer: {
 				type: "simple",
 				symbol:{
