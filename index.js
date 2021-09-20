@@ -103,7 +103,7 @@ require({
 		.then(loadSatellites)
 		.then(loadMetadata)
 		.then(generateGraphics)
-		.then(function(graphicsdata){
+		.then(function(){
 			
 			console.log("After the return of the generateGraphics");
 		})
@@ -602,7 +602,7 @@ require({
 				};
 				if (satellite.metadata === null || satellite.metadata === undefined){continue;} // Remove satellites without metadata
 				if (satellite.metadata.name === null || satellite.metadata.name === undefined){continue;}  //Remove satellites without names
-				if (satellite.metadata.name.indexOf(' DEB') !== -1 || satellite.metadata.name.indexOf(' R/B') !== -1){continue;} //Remove junk satellites
+				if (satellite.metadata.name.indexOf(' DEB')  || satellite.metadata.name.indexOf(' R/B')){continue;} //Remove junk satellites
 				const satAtt = {
 
 					OBJECTID: satellite.id,
@@ -629,7 +629,72 @@ require({
 				return graphicsdata
 
 			};
-            
+    
+	function createSatLayer(graphicsdata){
+		return new FeatureLayer({
+			source: graphics,
+            objectIdField: "OBJECTID",
+            fields: [
+              {
+                name: "OBJECTID",
+                type: "oid"
+              },
+              {
+                name: "apogee",
+                type: "string"
+              },
+			  {
+                name: "country",
+                type: "string"
+              },
+			  {
+                name: "inclination",
+                type: "double"
+              },
+			  {
+                name: "launch",
+                type: "date"
+              ,
+			  {
+                name: "name",
+                type: "string"
+              },
+			  {
+                name: "perigee",
+                type: "integer"
+              },
+			  {
+                name: "period",
+                type: "double"
+              },
+			  {
+                name: "satrec",
+                type: "string"
+              },
+			  {
+                name: "size",
+                type: "string"
+              }
+			  
+            ],
+			renderer: {
+				type: "simple",
+				symbol:{
+					type:"text",
+					color:"#7A003C",
+					text: "\ue661",
+					font:{
+						size:20,
+						family: "CalciteWebCoreIcons"
+					}
+				
+				}
+			
+			}
+		});		
+		
+	};
+	
 	function getSatelliteLocation(satrec, curdate){
 			var position_and_velocity = satellite.propagate(
 				satrec,
