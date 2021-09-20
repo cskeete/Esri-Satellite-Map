@@ -585,47 +585,44 @@ require({
 				    if (eci === null || eci === undefined || isNaN(eci.x) || isNaN(eci.y) || isNaN(eci.z)) {
 					continue;
 				    }
-							satellite.postition_X = eci.x * 1000
-							satellite.postition_Y = eci.y * 1000
-							satellite.metadata = renderer.metadata[satellite.id]
-							const point = {
-								type: "point", // autocasts as new Point()
-								x: satellite.postition_X,
-								y: satellite.postition_Y,
-								spatialReference: SpatialReference.WebMercator
-							};
+				satellite.postition_X = eci.x * 1000
+				satellite.postition_Y = eci.y * 1000
+				satellite.metadata = renderer.metadata[satellite.id]
+				const point = {
+					type: "point", // autocasts as new Point()
+					x: satellite.postition_X,
+					y: satellite.postition_Y,
+					spatialReference: SpatialReference.WebMercator
+				};
 
-							   // Create a symbol for drawing the point
-							const markerSymbol = {
-								type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-								color: [226, 119, 40]  
-							};
+				   // Create a symbol for drawing the point
+				const markerSymbol = {
+					type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+					color: [226, 119, 40]  
+				};
+				if (satellite.metadata.name === null || satellite.metadata.name === undefined){continue;}
+				const satAtt = {
 
-							const satAtt = {
+					OBJECTID: satellite.id,
+					satrec: satellite.satrec,
+					name: satellite.metadata.name,
+					country: satellite.metadata.country,
+					period: satellite.metadata.period,
+					inclination: satellite.metadata.inclination,
+					apogee: satellite.metadata.apogee,
+					perigee: satellite.metadata.perigee,
+					size: satellite.metadata.size,
+					launch: satellite.metadata.launch
 
-								OBJECTID: satellite.id,
-								satrec: satellite.satrec,
-								name: satellite.metadata.name || null,
-								country: satellite.metadata.country,
-								period: satellite.metadata.period,
-								inclination: satellite.metadata.inclination,
-								apogee: satellite.metadata.apogee,
-								perigee: satellite.metadata.perigee,
-								size: satellite.metadata.size,
-								launch: satellite.metadata.launch
+				};
 
-							};
 
-							if satAtt.name == null {
-								continue;
-							}
-
-							const satgraphic = new Graphic({
-								geometry: point,
-								symbol: markerSymbol,
-								attributes: satAtt	
-							});
-							graphicsdata.push(satgraphic)			   
+				const satgraphic = new Graphic({
+					geometry: point,
+					symbol: markerSymbol,
+					attributes: satAtt	
+				});
+				graphicsdata.push(satgraphic)			   
 				}
 				return graphicsdata
 
