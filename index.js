@@ -104,9 +104,6 @@ require({
 		.then(loadMetadata)
 		.then(generateGraphics)
 		.then(createSatLayer)
-		.then(function(satLayer){
-	    		console.log("Hello How are you")
-	    })
 		.then(addToView)
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
