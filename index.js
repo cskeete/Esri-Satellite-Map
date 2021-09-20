@@ -629,7 +629,7 @@ require({
 			};
     
 	function createSatLayer(graphicsdata){
-		return new FeatureLayer({
+		return satLayer = new FeatureLayer({
 			source: graphicsdata,
             objectIdField: "OBJECTID",
             fields: [
@@ -707,8 +707,8 @@ require({
 	};            
 	
 	// Adds a given layer to the map in the view
-        function addToView(layer) {
-          view.map.add(layer);
+        function addToView(satLayer) {
+          view.map.add(satLayer);
         }
 	
 	function resetUI() {
