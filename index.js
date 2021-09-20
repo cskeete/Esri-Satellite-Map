@@ -20,10 +20,10 @@ require({
         'esri/Map',
         'esri/views/MapView',
         'esri/layers/FeatureLayer',
-	'esri/core/promiseUtils',
+		'esri/core/promiseUtils',
         'esri/Graphic',
         'esri/geometry/Point',
-        'esri/rest/locator',
+        'esri/geometry/SpatialReference',
         'dojo/number',
         'dojo/string',
         'dojo/domReady!'
@@ -32,10 +32,10 @@ require({
         Map,
         MapView,
         FeatureLayer,
-	promiseUtils, 
-	Graphic,
+		promiseUtils, 
+		Graphic,
         Point,
-        locator,
+        SpatialReference,
         number,
         string
     ) {
@@ -102,9 +102,10 @@ require({
             view.when()
 		.then(loadSatellites)
 		.then(loadMetadata)
+		.then(generateGraphics)
 		.then(function(){
-			console.log("Next Stop Here");
 			
+			console.log("After the return of the generateGraphics");
 		})
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
@@ -528,7 +529,9 @@ require({
 								satrec: satrec,
 								selected: false,
 								highlighted: false,
-								metadata: null
+								metadata: null,
+								postition_X: null,
+								position_Y: null
 							});
 						} 
 					renderer.satellites = satellites;   
@@ -573,7 +576,59 @@ require({
 				});				
 			}
 
-            function resetUI() {
+			function generateGraphics(renderer){
+				var curdate = new Date();
+				var graphicsdata = []
+				for (var i = 0; i < renderer.satellites.length; i++) {
+                    var satellite = renderer.satellites[i];
+                    var eci = this.getSatelliteLocation(satellite.satrec, curdate);
+                    if (eci === null || eci === undefined || isNaN(eci.x) || isNaN(eci.y) || isNaN(eci.z)) {
+                        continue;
+                    }
+					satellite.postition_X = eci.x * 1000
+					satellite.postition_Y = eci.y * 1000
+					satellite.metatdata = renderer.metatdata[satellite.id]
+					
+					const point = {
+						type: "point", // autocasts as new Point()
+						x: satellite.postition_X,
+						y: satellite.postition_Y,
+						spatialReference: SpatialReference.WebMercator
+					};
+					
+					   // Create a symbol for drawing the point
+					const markerSymbol = {
+						type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+						color: [226, 119, 40]  
+					};
+
+					const satAtt = {
+						
+						OBJECTID: satellite.id,
+						satrec: satellite.satrec,
+						name: satellite.metadata.name,
+						country: satellite.metadata.country,
+						period: satellite.metadata.period,
+						inclination: satellite.metadata.inclination,
+						apogee: satellite.metadata.apogee,
+						perigee: satellite.metadata.perigee,
+						size: satellite.metadata.size,
+						launch: satellite.metadata.launch
+					
+					};
+					
+					const satgraphic =	 new Graphic(
+						geometry: point,
+						symbol: markerSymbol,
+						attributes: satAtt	
+					);
+					graphicsdata.push(satgraphic)			   
+				}
+				return graphicsdata
+			
+			}
+            
+			function resetUI() {
                 $('.rc-country > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
                 $('.rc-type > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
                 $('.rc-size > button').removeClass('active').siblings('[data-value="none"]').addClass('active');
