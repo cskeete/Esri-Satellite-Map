@@ -578,7 +578,7 @@ require({
 
 			function generateGraphics(renderer){
 				var curdate = new Date();
-				var graphicsdata = []
+				var graphicsdata = [];
 				for (var i = 0; i < renderer.satellites.length; i++) {
                     var satellite = renderer.satellites[i];
                     var eci = this.getSatelliteLocation(satellite.satrec, curdate);
@@ -617,11 +617,11 @@ require({
 					
 					};
 					
-					const satgraphic =	 new Graphic(
+					const satgraphic = new Graphic({
 						geometry: point,
 						symbol: markerSymbol,
 						attributes: satAtt	
-					);
+					});
 					graphicsdata.push(satgraphic)			   
 				}
 				return graphicsdata
