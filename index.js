@@ -636,7 +636,7 @@ require({
               {
                 name: "OBJECTID",
                 type: "oid"
-              },
+              }/*,
               {
                 name: "apogee",
                 type: "string"
@@ -672,7 +672,7 @@ require({
 			  {
                 name: "size",
                 type: "string"
-              }
+              }*/
 			  
             ],
 			renderer: {
