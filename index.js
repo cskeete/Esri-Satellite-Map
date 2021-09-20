@@ -18,10 +18,9 @@ require({
     }]
 }, [
         'esri/Map',
-        'esri/Camera',
         'esri/views/MapView',
         'esri/layers/FeatureLayer',
-		'esri/core/promiseUtils',
+	'esri/core/promiseUtils',
         'esri/Graphic',
         'esri/geometry/Point',
         'esri/rest/locator',
@@ -31,10 +30,10 @@ require({
     ],
     function (
         Map,
-        Camera,
         MapView,
         FeatureLayer,
-		Graphic,
+	promiseUtils, 
+	Graphic,
         Point,
         locator,		
         number,
@@ -101,10 +100,10 @@ require({
 
             }); 
             view.when()
-			     .then()
-				 .then()
-				 .catch((e) => {
-            console.error("Creating satellite layer failed", e);
+		.then()
+		.then()
+		.catch((e) => {
+            		console.error("Creating satellite layer failed", e);
           });
             view.on('click', function (e) {
                 // Highlighted satellite
