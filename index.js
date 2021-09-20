@@ -87,7 +87,7 @@ require({
             // Create map and view
             var view = new MapView({
                 map: new Map({
-                    basemap: 'arcgis-dark-gray',
+                    basemap: 'dark-gray',
                    layers:[usmclayer]
                 }),
                 container: 'map',
