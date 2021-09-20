@@ -105,7 +105,7 @@ require({
 		.then(function(satellites, metadata){
 			console.log("Next Stop Here");
 			
-		});
+		})
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
           });
