@@ -530,11 +530,8 @@ require({
 							metadata: null
 						});
 					} 
-				console.log("What about here");
+				resolve(satellites);
 			   });
-
-			   resolve(satellites);
-
 		   });
 
 
