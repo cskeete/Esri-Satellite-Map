@@ -24,6 +24,7 @@ require({
         'esri/Graphic',
         'esri/geometry/Point',
         'esri/rest/locator',
+	'root/renderer',
         'dojo/number',
         'dojo/string',
         'dojo/domReady!'
@@ -35,7 +36,8 @@ require({
 	promiseUtils, 
 	Graphic,
         Point,
-        locator,		
+        locator,
+	Renderer,
         number,
         string
     ) {
@@ -101,7 +103,7 @@ require({
             }); 
             view.when()
 		.then(loadSatellites)
-		.then(loadMetadata)
+		.then(loadMetadata(satellites))
 		.then(function(satellites, metadata){
 			console.log("Next Stop Here");
 			
