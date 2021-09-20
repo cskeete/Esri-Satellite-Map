@@ -138,7 +138,7 @@ require({
                 showDialog('info');
                 // Display the orbit for the click satellite
                 renderer.showOrbit();
-            }); */
+            }); 
             $('#map').mousemove(function (e) {
                 if (!renderer) { return; }
                 renderer.mousemove(e.offsetX, e.offsetY);
