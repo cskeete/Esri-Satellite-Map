@@ -603,14 +603,14 @@ require({
 				if (satellite.metadata.name.indexOf(' DEB') !== -1 || satellite.metadata.name.indexOf(' R/B') !== -1){continue;} //Remove junk satellites
 				const satAtt = {
 
-					OBJECTID: satellite.id,
-					satrec: satellite.satrec,
+					OBJECTID: Number(satellite.id),
+					satrec: JSON.stringify(satellite.satrec),
 					name: satellite.metadata.name,
 					country: satellite.metadata.country,
-					period: satellite.metadata.period,
-					inclination: satellite.metadata.inclination,
-					apogee: satellite.metadata.apogee,
-					perigee: satellite.metadata.perigee,
+					period: Number(satellite.metadata.period),
+					inclination: Number(satellite.metadata.inclination),
+					apogee: Number(satellite.metadata.apogee),
+					perigee: Number(satellite.metadata.perigee),
 					size: satellite.metadata.size,
 					launch: satellite.metadata.launch
 
