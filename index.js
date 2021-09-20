@@ -101,7 +101,10 @@ require({
             }); 
             view.when()
 		.then(loadSatellitesfromText)
-		.then()
+		.then(fuction(satellites)({
+		    console.log("Stop script here");
+			    
+	    });)
 		.catch((e) => {
             		console.error("Creating satellite layer failed", e);
           });
@@ -530,9 +533,7 @@ require({
 
 			   });
 
-			   resolve(
-				console.log("Stop the script here")
-			   );
+			   resolve(satellites);
 
 		   });
 
